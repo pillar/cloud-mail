@@ -15,9 +15,9 @@ const starService = {
 		if (!email) {
 			throw new BizError('星标的邮件不存在');
 		}
-		if (!email.userId === userId) {
-			throw new BizError('星标的邮件非当前用户所有');
-		}
+                if (email.userId !== userId) {
+                        throw new BizError('星标的邮件非当前用户所有');
+                }
 		const exist = await orm(c).select().from(star).where(
 			and(
 				eq(star.userId, userId),
